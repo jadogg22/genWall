@@ -8,8 +8,6 @@ import (
 	"genWall/cfg"
 	"genWall/engine"
 	//"github.com/fogleman/gg"
-	"github.com/jdxyw/generativeart"
-	"github.com/jdxyw/generativeart/arts"
 )
 
 func main() {
@@ -24,11 +22,4 @@ func main() {
 	// img := gen.Generate(cfg)
 	// img.Save(cfg.OutputPath)
 	// fmt.Println("Wallpaper saved to %s" + cfg.OutputPath)
-
-	c := generativeart.NewCanva(cfg.Width, cfg.Height)
-	c.SetBackground(cfg.BaseColor)
-	c.FillBackground()
-	c.SetColorSchema(cfg.Pallete)
-	c.Draw(arts.NewContourLine(500))
-	c.ToPNG("contourline.png")
 }
