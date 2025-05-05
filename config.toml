@@ -1,0 +1,18 @@
+# ~/.config/genwall/config.toml
+# rose-pine wallpaper generator
+
+[General]
+path = "~/.cache/genwall.png"
+width = 2556
+height = 1440
+background = "#191724"
+pallete = ["EB6F92", "F6C177", "EBCB8B", "31748F", "9CCFD8", "C4A7E7"]
+
+[damascus]
+enabled = true
+line_num = 700
+dot_radius = 2.0
+line_length = 1200
+noise_scale = 350.0
+dot_step = 0.4
+
