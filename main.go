@@ -17,29 +17,18 @@ func main() {
 	cfg := cfg.GrabConfig()
 	// select the generator based on the config
 	canvas := engine.NewCanvas(cfg)
+	// create strategy based on the config
 	strategy := engine.NewDamascus(cfg.General, cfg.Damascus)
 	canvas.SetStrategy(strategy)
 
+
 	fmt.Println("Generating wallpaper with " + canvas.Name())
+	// Generate the wallpaper
 	err := canvas.Draw()
 	if err != nil {
 		fmt.Println("Error generating wallpaper: ", err)
 		return
 	}
 	canvas.ToPNG("output.png")
-
-
-	//canvas.ToPNG(cfg.General.OutputPath)
-	// Generate the wallpaper using strategy
-	
-
-	// This is what we're looking to do here.
-	// cfg := cfg.LoadConfig()
-	// gen := SelectGenerator(cfg)
-
-	// fmt.Println("Generating wallpaper with %s..." + gen.Name())
-	// img := gen.Generate(cfg)
-	// img.Save(cfg.OutputPath)
-	// fmt.Println("Wallpaper saved to %s" + cfg.OutputPath)
 }
 
