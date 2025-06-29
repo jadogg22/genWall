@@ -18,9 +18,6 @@ var ROSE_PINE_COLORS = []color.RGBA{
 	{0xC4, 0xA7, 0xE7, 0xFF},
 }
 
-
-
-
 func baseConfig() *FullConfig {
 	// Set the default config
 	GeneralConfig := GeneralConfig{
@@ -40,13 +37,25 @@ func baseConfig() *FullConfig {
 		DotStep:    0.4,
 	}
 
+	voronoiConfig := VoronoiConfig{
+		Enabled:     false,
+		NumPoints:   1000,
+		StrokeWidth: 1.0,
+		StrokeColor: "#000000",
+	}
+
+	sprayConfig := SprayConfig{
+		Enabled:   false,
+		NumPoints: 10000,
+	}
+
 	return &FullConfig{
 		General:   GeneralConfig,
 		Damascus:  damascusConfig,
-		}
+		Voronoi:   voronoiConfig,
+		Spray:     sprayConfig,
+	}
 }
-	
-
 
 func GrabConfig() *FullConfig {
 	// Check if the config file exists in the current directory
@@ -55,9 +64,8 @@ func GrabConfig() *FullConfig {
 		fmt.Println("Error loading config file:", err)
 		cfg = baseConfig()
 	}
-	return cfg	
+	return cfg
 }
-
 
 func RGBAtoHex(c color.RGBA) string {
 	return fmt.Sprintf("#%02x%02x%02x", c.R, c.G, c.B)

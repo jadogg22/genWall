@@ -3,40 +3,51 @@ package cfg
 import (
 	"fmt"
 	"github.com/BurntSushi/toml"
-	"os"
 	"image/color"
+	"os"
 	"strconv"
 )
 
 type FullConfig struct {
-	General GeneralConfig
+	General  GeneralConfig
 	Damascus DamascusConfig
+	Voronoi  VoronoiConfig
+	Spray    SprayConfig
 }
 
 type GeneralConfig struct {
-	OutputPath string `toml:"output_path"`
-	Width      int `toml:"width"`
-	Height     int `toml:"height"`
-	BaseColor  string `toml:"background"`
+	OutputPath string   `toml:"output_path"`
+	Width      int      `toml:"width"`
+	Height     int      `toml:"height"`
+	BaseColor  string   `toml:"background"`
 	Pallete    []string `toml:"pallete"`
 }
 
 type DamascusConfig struct {
-	Enabled     bool
-	LineNum     int     `toml:"line_num"`
-	DotRadius   float64 `toml:"dot_radius"`
-	LineLength  int     `toml:"line_length"`
-	NoiseScale  float64 `toml:"noise_scale"`
-	DotStep     float64 `toml:"dot_step"`
+	Enabled    bool
+	LineNum    int     `toml:"line_num"`
+	DotRadius  float64 `toml:"dot_radius"`
+	LineLength int     `toml:"line_length"`
+	NoiseScale float64 `toml:"noise_scale"`
+	DotStep    float64 `toml:"dot_step"`
 }
 
+type VoronoiConfig struct {
+	Enabled     bool
+	NumPoints   int     `toml:"num_points"`
+	StrokeWidth float64 `toml:"stroke_width"`
+	StrokeColor string  `toml:"stroke_color"`
+}
 
-
+type SprayConfig struct {
+	Enabled   bool
+	NumPoints int `toml:"num_points"`
+}
 
 // find the config file in ~/.config/genwall/config.toml
 // or in the current directory
 func LoadConfig() (*FullConfig, error) {
-    var cfg FullConfig
+	var cfg FullConfig
 	// Check if the config file exists in the current directory
 	if _, err := os.Stat("config.toml"); os.IsNotExist(err) {
 		// Check if the config file exists in the home directory
@@ -65,7 +76,7 @@ func LoadConfig() (*FullConfig, error) {
 }
 
 func HexToRGBA(hex string) (color.RGBA, error) {
-	if (len(hex) == 7 && hex[0] == '#') {
+	if len(hex) == 7 && hex[0] == '#' {
 		hex = hex[1:]
 	}
 	if len(hex) != 6 {

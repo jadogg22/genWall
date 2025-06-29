@@ -50,9 +50,14 @@ func NewCanvas(cfg *cfg.FullConfig) *Canvas {
 
 func selectStrategy(cfg *cfg.FullConfig) ArtStrategy {
 	// Select the strategy based on the config
-	// For now, we'll just return a dummy generator
 	if cfg.Damascus.Enabled {
 		return NewDamascus(cfg.General, cfg.Damascus)
+	}
+	if cfg.Voronoi.Enabled {
+		return NewVoronoi(cfg.General, cfg.Voronoi)
+	}
+	if cfg.Spray.Enabled {
+		return NewSpray(cfg.General, cfg.Spray)
 	}
 	return nil
 }
